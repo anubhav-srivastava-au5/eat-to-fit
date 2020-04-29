@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const cors = require('cors')
 const router = express.Router();
-const auth=require('../middleware/auth')
+const auth = require('../middleware/auth')
 var dotenv = require('dotenv');
 dotenv.config();
 
@@ -41,7 +41,7 @@ router.post('/login', async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findAll({where:{ email: email }}).then(user => {
+  User.findAll({ where: { email: email } }).then(user => {
     if (user.length < 1) {
       return res.status(401).json({ message: "User Doesn't Exist" });
     }
@@ -63,11 +63,12 @@ router.post('/login', async (req, res, next) => {
 })
 
 // router.delete('/logout', auth, async(req, res, next) => {
-//   console.log(req.users)
-//   const user=req.user;
-//   console.log(user[0].id)
-//   console.log(user)
-//   console.log(User)
+//   console.log(req.userData)
+//   console.log(req.headers.authorization)
+//   const User=req.user;
+//   // console.log(user.id)
+//   // console.log(User)
+//   // console.log(User)
 //   try{
 //     User.update({
 //       token:null
@@ -86,5 +87,21 @@ router.post('/login', async (req, res, next) => {
 //     res.status(400).send(`validation error: ${err.message}`);
 //   }
 // });
+
+
+router.delete('/logout', auth, async (req, res, next) => {
+  if (req.headers.authorization == '') {
+    console.log(req.headers.authorization)
+    res.status(400).send(`validation error: ${err.message}`);
+  }
+  else {
+    req.headers.authorization = null
+    console.log(req.headers.authorization)
+    res.json({
+      status: 200,
+      message: "logged out successully!see you again"
+    })
+  }
+})
 
 module.exports = router;

@@ -45,14 +45,14 @@ router.get('/', auth, async (req, res, next) => {
 
 // router.post("/link", auth, async (req, res) => {
 //     try {
-//         const { productId, userId } = req.body
-//         const user_order = await userOrder.create({ productId, userId })
+//         const { orderId, productId, userId } = req.body
+//         const user_order = await userOrder.create({ orderId, productId, userId })
 //         res.json(user_order)
 //     }
 //     catch (err) {
 //         console.log(err);
 //         return res.status(400).send(err);
 //     };
-// })
+})
 
 module.exports = router;
