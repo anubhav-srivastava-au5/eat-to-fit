@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const auth = require('../middleware/auth')
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 const Diet = require("../models/user-diet-plan")
 const User = require("../models/users")
